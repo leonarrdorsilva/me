@@ -10,5 +10,16 @@ c. O número de homens;
 d. O sexo da pessoa mais alta. */
 
 User Function exer4()
+local aPessoas := Array {}
+local nX := 1
+
+
+
+        For nX:= 1 to Len(aArray)
+            aAdd(aPessoas, {FWInputBox("Digite o Sexo"),FWInputBox('Digite a sua altura')})   
+        Next
+        
+                                                                                                                                         ))
+
 
 Return
