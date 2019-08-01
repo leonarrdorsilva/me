@@ -3,8 +3,8 @@
 User Function Music02()
 
     Local oBrowse := FWMBrowse():New()
-
     oBrowse:SetAlias("ZA1")
+    oBrowse:SetMenuDef('mvcMusic')
     oBrowse:Activate()// para INICIALIZAR O OBJETO
 
 Return
@@ -17,16 +17,24 @@ Static Function ModelDef()
     Local oModel := MPFormModel():New("ZA1MODEL")
     Local oStruZA1:= FwFormStruct(1,"ZA1")
     Local oStruZA2:= FwFormStruct(1,"ZA2")
-    Local bPos := {|oModelField|PosValMusic(oModelField)}
-    oModel:AddFields("ZA1MASTER",/* owner  */,oStruZA1,/**/,bPos)
-    oModel:AddGrid('ZA2DETAIL', 'ZA1MASTER', oStruZA2 )
-    oModel:SetRelation(  'ZA2DETAIL',  { {'ZA2_FILIAL','xFilial("ZA2")',;
-    { 'ZA2_MUSICA', 'ZA1_MUSICA' } }, ZA2->( IndexKey( 1 ) ) )
+    local bValid:= {|oModelGrid|ValidAutor(oModelGrid)}
+   // Local bPos := {|oModelField|PosValMusic(oModelField)}
+    //
+    
+    oModel:AddFields("ZA1MASTER",/* owner  */,oStruZA1,/**/)
+    oModel:AddGrid( 'ZA2DETAIL', 'ZA1MASTER', oStruZA2,,bValid ) 
+    oModel:SetRelation('ZA2DETAIL', { {'ZA2_FILIAL', "xFilial('ZA2')"},;
+ {"ZA2_MUSICA" , "ZA1_MUSICA"} }, ZA2->( IndexKey( 1 ) ) )
 
     oModel:GetModel('ZA1MASTER'):SetDescription('Dados da Música')
     oModel:GetModel('ZA2DETAIL'):SetDescription('Dados do Autor da Música')
 
 Return oModel
+
+Static Function ValidAutor(oModelGrid)
+
+
+Return
 
 Static Function PosValMusic(oModelField)
     local lTudoOk :=.T.//
@@ -39,18 +47,19 @@ Static Function PosValMusic(oModelField)
                                                                                                                                                                               
 Return lTudoOk
 
+
 Static Function ViewDef()//
     Local oView:= FWFormView():New()//
     Local oStruct:= FwFormStruct(2,"ZA1")
-    Local oStructZA2 := FWFormStruct(2, "ZA2")
+    Local oStructZA2 := FWFormStruct(2,"ZA2")
     oView:SetModel(ModelDef())//Return Do ModelDef para SetModel
                //ID      ,ESTRUTURA, ID DO MODEL
     oView:AddField("ZA1_VIEW",oStruct,"ZA1MASTER")
     oView:AddGrid( 'ZA2_VIEW', oStructZA2, 'ZA2DETAIL' )
     // Define campos que terao Auto Incremento
-    oView:AddIncrementField( 'ZA2_VIEW', 'ZA2_ITEM' )
+    oView:AddIncrementField('ZA2_VIEW', 'ZA2_ITEM' )
 
-    oView:CreateHorizontalBox("BOXZA1",100)//taxa de exibição na tela.
+    oView:CreateHorizontalBox("BOXZA1", 50)//taxa de exibição na tela.
     oView:CreateHorizontalBox("BOXZA2", 50)
 
     oView:SetOwnerView("ZA1_VIEW","BOXZA1")
@@ -59,6 +68,3 @@ Static Function ViewDef()//
     oView:EnableTitleView('ZA2_VIEW') //habilita a descricao do submodelo
 
 Return oView
-
-
-

@@ -5,7 +5,7 @@ User Function Autor01()
 Local oBrowse := FWMBrowse():New()
 
 oBrowse:SetAlias("ZA0")
-oBrowse:SetMenuDef('mvcAutor')
+oBrowse:SetMenuDef('mvcAutor')//sempre colocar o mesmo nome no menudef. e na função que retorna o menudef
 
 oBrowse:Activate()// para INICIALIZAR O OBJETO
 
