@@ -22,7 +22,7 @@ Static Function ModelDef()
     //
     
     oModel:AddFields("ZA1MASTER",/* owner  */,oStruZA1,/**/)
-    oModel:AddGrid( 'ZA2DETAIL', 'ZA1MASTER', oStruZA2,,bValid ) 
+    oModel:AddGrid( 'ZA2DETAIL', 'ZA1MASTER', oStruZA2, ,bValid ) 
     oModel:SetRelation('ZA2DETAIL', { {'ZA2_FILIAL', "xFilial('ZA2')"},;
  {"ZA2_MUSICA" , "ZA1_MUSICA"} }, ZA2->( IndexKey( 1 ) ) )
 
@@ -32,9 +32,25 @@ Static Function ModelDef()
 Return oModel
 
 Static Function ValidAutor(oModelGrid)
+local lret:= .F.
+local cCodAutor := oModelGrid:GetValue("ZA2_AUTOR")
+Local aArea := GetArea() //guarda estado da area de trabalho ativa
+Local aAreaZA0 := ZA0->(GetArea())
 
+DbSelectArea("ZA0")
+ZA0->(DbSetOrder(1))
+If ZA0->(DBSeek(xFilial("ZA0") + PADR(cCodAutor),TamSX3('ZA0_CODIGO')[1]))
+    If ZA0 ->
+        
+    EndIf
+    
+    
+ 
+        
+    EndIf
 
-Return
+RestArea(aArea)
+Return lret
 
 Static Function PosValMusic(oModelField)
     local lTudoOk :=.T.//
