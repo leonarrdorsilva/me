@@ -32,24 +32,23 @@ Static Function ModelDef()
 Return oModel
 
 Static Function ValidAutor(oModelGrid)
-local lret:= .F.
-local cCodAutor := oModelGrid:GetValue("ZA2_AUTOR")
-Local aArea := GetArea() //guarda estado da area de trabalho ativa
-Local aAreaZA0 := ZA0->(GetArea())
+local lret:= .T.
+local cCodAutor := oModelGrid:GetValue("ZA2_AUTOR")//pega o valor que ZA2_AUTOR recebeu
+Local aArea := GetArea() //guarda estado da area de trabalho ativa(s)
+Local aAreaZA0 := ZA0->(GetArea())//salvo a área da tabela ZA0
+Local aCampoZA0 := TamSX3('ZA0_CODIGO')//faço uma busca na tabela de campos, e vejo o tamanho do campo ZA0_CODIGO
 
 DbSelectArea("ZA0")
-ZA0->(DbSetOrder(1))
-If ZA0->(DBSeek(xFilial("ZA0") + PADR(cCodAutor),TamSX3('ZA0_CODIGO')[1]))
-    If ZA0 ->
-        
-    EndIf
-    
-    
- 
-        
-    EndIf
-
-RestArea(aArea)
+ZA0->(DbSetOrder(1))               
+                                    //Padr(parametro, parametro)
+    if ZA0->(DBSeek(xFilial("ZA0") + PADR(cCodAutor, aCampoZA0[1])))// if 1
+//PADR -> acrescenta espaços a direita para completar os espaços para que seja encontrado o campo exato.
+        if !Empty(ZA0->ZA0_DTAFAL)//pergunto se , ZA0_DTAFAL está em branco. if2
+        lret := .F.
+        Help(,,'HELP',,'O Autor da Música não pode ser cadastrado',1,0,,,,,,{"Uma música não pode conter um autor falecido,escolha outro"})
+   endif//if2
+endIf//if1
+RestArea(aArea)//
 Return lret
 
 Static Function PosValMusic(oModelField)
