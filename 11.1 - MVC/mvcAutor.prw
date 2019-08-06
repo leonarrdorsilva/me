@@ -9,6 +9,7 @@ oBrowse:SetMenuDef('mvcAutor')//sempre colocar o mesmo nome no menudef. e na fun
 
 oBrowse:Activate()// para INICIALIZAR O OBJETO
 
+
 Return
 
 Static Function Menudef()//padrãoooooo

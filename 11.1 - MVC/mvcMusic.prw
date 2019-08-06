@@ -24,7 +24,7 @@ Static Function ModelDef()
     oModel:AddFields("ZA1MASTER",/* owner  */,oStruZA1,/**/)
     oModel:AddGrid( 'ZA2DETAIL', 'ZA1MASTER', oStruZA2, ,bValid ) 
     oModel:SetRelation('ZA2DETAIL', { {'ZA2_FILIAL', "xFilial('ZA2')"},;
- {"ZA2_MUSICA" , "ZA1_MUSICA"} }, ZA2->( IndexKey( 1 ) ) )
+ {" ZA2_MUS   ICA" , "ZA1_MUSICA"} }, ZA2->( IndexKey( 1 ) ) )
 
     oModel:GetModel('ZA1MASTER'):SetDescription('Dados da Música')
     oModel:GetModel('ZA2DETAIL'):SetDescription('Dados do Autor da Música')
@@ -37,8 +37,8 @@ local cCodAutor := oModelGrid:GetValue("ZA2_AUTOR")//pega o valor que ZA2_AUTOR 
 Local aArea := GetArea() //guarda estado da area de trabalho ativa(s)
 Local aAreaZA0 := ZA0->(GetArea())//salvo a área da tabela ZA0
 Local aCampoZA0 := TamSX3('ZA0_CODIGO')//faço uma busca na tabela de campos, e vejo o tamanho do campo ZA0_CODIGO
-
-DbSelectArea("ZA0")
+ 
+//DbSelectArea("ZA0")
 ZA0->(DbSetOrder(1))               
                                     //Padr(parametro, parametro)
     if ZA0->(DBSeek(xFilial("ZA0") + PADR(cCodAutor, aCampoZA0[1])))// if 1
