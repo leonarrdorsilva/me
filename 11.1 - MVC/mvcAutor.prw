@@ -7,7 +7,7 @@ Local oBrowse := FWMBrowse():New()
 oBrowse:SetAlias("ZA0")
 oBrowse:SetMenuDef('mvcAutor')//sempre colocar o mesmo nome no menudef. e na fun��o que retorna o menudef
 
-oBrowse:Activate()// para INICIALIZAR O OBJETO as
+oBrowse:Activate()// para INICIALIZAR O OBJETO edit
 
 
 Return
