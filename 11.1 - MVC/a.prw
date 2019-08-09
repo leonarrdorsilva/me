@@ -1,11 +1,11 @@
-#include 'protheus.ch'
-
+#INCLUDE "protheus.ch"
 USER FUNCTION TMediaPlayer()
     local nLeft := 1
     local nTopBtn := 202
     local showBar := .F.
     local isMute := .F.
     local nVolume := 70
+    local array
  
     SetStyle(5)
  
@@ -13,9 +13,7 @@ USER FUNCTION TMediaPlayer()
  
         oMedia := TMediaPlayer():New(1,nLeft,255,200,oDlg,"c:/garbage/file.mp4",nVolume,showBar)
  
-        TButton():New( nTopBtn, nLeft, "Open", oDlg,;
-            {|| oMedia:openFile( FWInputBox("Escolha o arquivo", "c:/garbage/") ) },;
-            28,010,,,.F.,.T.,.F.,,.F.,,,.F.)
+        
  
         TButton():New( nTopBtn, nLeft+=28, "Play", oDlg,;
             {|| oMedia:play() },;

@@ -39,7 +39,7 @@ local cNome := oModelField:GetValue("ZA0_NOME")
 //Para atribuir valor SetValue(encapsulamento)
     If dFalec > Date()
         lTudoOk := .F. 
-        Help(,, 'HELP',,'Nï¿½o adivinhe o futuro',1,0,,,,,,{"Informe outra data menor ou igual ï¿½ " + dtoc(date())})
+        Help(,, 'HELP',,'Não adivinhe o futuro',1,0,,,,,,{"Informe outra data menor ou igual á " + dtoc(date())})
         //Help exove a omterface de akida   
     ElseIF 'RICARDO' $ UPPER(cNome) .Or. Empty(cNome)//$ = se o texto estï¿½ contido em outro.
         lTudoOk:= .F.

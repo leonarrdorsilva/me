@@ -22,9 +22,9 @@ Static Function ModelDef()
     //
     
     oModel:AddFields("ZA1MASTER",/* owner  */,oStruZA1,/**/)
-    oModel:AddGrid( 'ZA2DETAIL', 'ZA1MASTER', oStruZA2, ,bValid ) 
-    oModel:SetRelation('ZA2DETAIL', { {'ZA2_FILIAL', "xFilial('ZA2')"},;
- {" ZA2_MUS   ICA" , "ZA1_MUSICA"} }, ZA2->( IndexKey( 1 ) ) )
+    oModel:AddGrid( 'ZA2DETAIL','ZA1MASTER', oStruZA2, ,bValid ) 
+    oModel:SetRelation('ZA2DETAIL',{{'ZA2_FILIAL',"xFilial('ZA2')"},;
+        {"ZA2_MUSICA","ZA1_MUSICA"}},ZA2->( IndexKey( 1 ) ) )
 
     oModel:GetModel('ZA1MASTER'):SetDescription('Dados da Música')
     oModel:GetModel('ZA2DETAIL'):SetDescription('Dados do Autor da Música')
@@ -83,3 +83,5 @@ Static Function ViewDef()//
     oView:EnableTitleView('ZA2_VIEW') //habilita a descricao do submodelo
 
 Return oView
+
+.+
