@@ -17,8 +17,9 @@ Static function ModelDef() //sempre staticfunction
 local oModel := MPFormModel():New('ZA1MODEL')
 local oStruZA1 := FWFormStruct(1,'ZA1') //cria estrutura
 local oStruZA2 := FWFormStruct(1,'ZA2') //cria estrutura
+local bPos := {|oModelField| PosVldMusic(oModelField) } 
 
-oModel:AddFields('ZA1MASTER',/*Owner*/ ,oStruZA1,/**/,) // adiciona
+oModel:AddFields('ZA1MASTER',/*Owner*/ ,oStruZA1,/**/,bpos) // adiciona
 oModel:AddGrid('ZA2DETAIL', 'ZA1MASTER', oStruZA2, , )
 
 oModel:SetRelation( 'ZA2DETAIL', { {'ZA2_FILIAL', "xFilial('ZA2')"},;
@@ -27,7 +28,31 @@ oModel:SetRelation( 'ZA2DETAIL', { {'ZA2_FILIAL', "xFilial('ZA2')"},;
 oModel:GetModel('ZA1MASTER'):SetDescription('Dados da Musica')
 oModel:GetModel('ZA2DETAIL'):SetDescription('Dados do Autor da Musica')
 
+
 Return oModel
+
+Static Function PosVldMusic(oModelField) 
+    local lTudoOk := .T.
+    local dData := oModelField:GetValue('ZA1_DATA')  //Validação da Data
+    local cTipo := oModelField:GetValue("ZA1_GENERO ")
+    local cNome := oModelField:GetValue("ZA1_TITULO ") // Validação do Nome
+    local nMsc := oModelField:GetValue("ZA1_MUSICA") 
+
+
+    If dData > Date() //Condição para a validação da Data 
+        lTudoOk := .F.   
+        Help(, , "Erro", , "Informe outra data", 1, 0, , , , , , {"Informe outra data menor ou igual á " + dtoc(date())})
+    EndIf    
+    If Empty(cTipo)
+        lTudoOk:= .F.
+        Help(, ,"Erro", , "o campo Tipo esta inválido", 1, 0, , , , , , {"Defina o genêro da música"})
+    EndIf
+         If Empty(cNome)
+        lTudoOk:= .F.
+        Help(, ,"Erro", , "o campo Nome esta inválido", 1, 0, , , , , , {"Defina o titulo da música"})
+    EndIf
+    Return lTudoOk
+    
 
 Static Function ViewDef() //sempre static function
 local oView := FWFormView():New() //objeto da view
