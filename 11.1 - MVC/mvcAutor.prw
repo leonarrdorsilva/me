@@ -16,7 +16,7 @@ Static Function Menudef()//padr�oooooo
 
 //Local aRotina := FWMVCMenu("mvc01") //Menu padr�o C.R.U.D
 
-Return FWMVCMenu("mvcAutor")
+Return FWMVCMenu("mvcAutor") 
 
 //MVC - Model(Dados e regra de neg�cio)
 //      View (Interface)
