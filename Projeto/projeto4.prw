@@ -42,7 +42,7 @@ Static Function ViewDef() //sempre static function
     oStructZA5:RemoveField('ZA5_ALBUM')
     oStructZA5:RemoveField('ZA5_MUSICA')
     oView:CreateHorizontalBox('BOXZA3', 40)
-    oView:CreateHorizontalBox('BOXZA4', 30)
+    oView:CreateHorizontalBox('BOXZA4', 30) 
     oView:CreateHorizontalBox('BOXZA5', 30)
     oView:SetOwnerView('ZA3_VIEW','BOXZA3') //colocar um componente no outro
     oView:SetOwnerView('ZA4_VIEW','BOXZA4') //colocar um componente no outro
@@ -50,6 +50,7 @@ Static Function ViewDef() //sempre static function
     oView:EnableTitleView('ZA4_VIEW')
     oView:EnableTitleView('ZA5_VIEW')
 Return oView
+
 Static Function vldAlbum(oModelField)
     local lOK := .T.
     local cNome := oModelField:GetValue("ZA3_DESCRI")
