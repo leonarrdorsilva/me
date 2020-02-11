@@ -1,6 +1,6 @@
 #include 'protheus.ch'
 #include 'fwmvcdef.ch'
-
+// -------------------------------PLAYLIST -------------------------------
 user function projeto3()
     local oBrowse := FWMBrowse():New() //Criar browse
     oBrowse:SetAlias('ZA7') //PLAYLIST
@@ -18,41 +18,44 @@ Static function ModelDef() //sempre staticfunction
     local oStruZA8 := FWFormStruct(1,'ZA8') //cria estrutura
     local oStruZA2 := FWFormStruct(1,'ZA2') //cria estrutura
     local oStruZA4 := FWFormStruct(1,'ZA4') //cria estrutura
-
-
+    //Bloco de Validações
     local bValid := {|oModelField| VldPlaylist(oModelField)}
     local bPlay := {|oModelGrid| validaP(oModelGrid)}
 
-    oModel:AddFields('ZA7MASTER',/*Owner*/ , oStruZA7,/**/, bValid) // adiciona
-    oModel:AddGrid('ZA8DETAIL', 'ZA7MASTER', oStruZA8, , bPlay)
-    oModel:AddGrid('ZA2DETAIL', 'ZA7MASTER', oStruZA2,,)
-    oModel:AddGrid('ZA4DETAIL', 'ZA7MASTER', oStruZA4,,)
-    
-    oModel:SetRelation( 'ZA8DETAIL', { {'ZA8_FILIAL', "xFilial('ZA8')"}, {"ZA8_PLAY" , "ZA7_CODIGO"} }, ZA8->( IndexKey( 1 ) ) )
-    
-    oModel:GetModel('ZA8DETAIL'):SetDescription('Musicas da playlist')
-    oModel:GetModel('ZA2DETAIL'):SetDescription('Pesquisar Interpretes')
-    oModel:GetModel('ZA4DETAIL'):SetDescription('Pesquisar Álbuns')
-    oModel:GetModel( 'ZA8DETAIL' ):SetUniqueLine( { 'ZA8_MUSICA' } )
-    
-    oStruZA2:AddField('SELECT', ' ', 'SELECT', 'L', 1, 0, , , {}, .F.,FWBuildFeature( STRUCT_FEATURE_INIPAD, ".F.")) 
-    oStruZA4:AddField('SELECT', ' ', 'SELECT', 'L', 1, 0, , , {}, .F.,FWBuildFeature( STRUCT_FEATURE_INIPAD, ".F."))
-    oStruZA4:AddField('DESCRI',' ', 'DESCRI', 'C',100, 0, , , {},.F.,)
-    
-    oModel:GetModel('ZA2DETAIL'):SetOnlyQuery()
-    oModel:GetModel('ZA4DETAIL'):SetOnlyQuery()
-    //define que o grid nao é obrigatorio
-    oModel:GetModel('ZA2DETAIL'):SetOptional()
-    oModel:GetModel('ZA4DETAIL'):SetOptional()
+        oModel:AddFields('ZA7MASTER',/*Owner*/ , oStruZA7,/**/, bValid) // adiciona
+        oModel:AddGrid('ZA8DETAIL', 'ZA7MASTER', oStruZA8, , bPlay)
+        oModel:AddGrid('ZA2DETAIL', 'ZA7MASTER', oStruZA2,,)
+        oModel:AddGrid('ZA4DETAIL', 'ZA7MASTER', oStruZA4,,)
+        
+        oModel:SetRelation( 'ZA8DETAIL', { {'ZA8_FILIAL', "xFilial('ZA8')"}, {"ZA8_PLAY" , "ZA7_CODIGO"} }, ZA8->( IndexKey( 1 ) ) )
+        
+        oModel:GetModel('ZA8DETAIL'):SetDescription('Musicas da Playlist')
+        oModel:GetModel('ZA2DETAIL'):SetDescription('Pesquisar Interpretes')
+        oModel:GetModel('ZA4DETAIL'):SetDescription('Pesquisar Álbuns')
+        oModel:GetModel( 'ZA8DETAIL' ):SetUniqueLine( { 'ZA8_MUSICA' } )
+        
+        oStruZA2:AddField('SELECT', ' ', 'SELECT', 'L', 1, 0, , , {}, .F.,FWBuildFeature( STRUCT_FEATURE_INIPAD, ".F.")) 
+        oStruZA4:AddField('SELECT', ' ', 'SELECT', 'L', 1, 0, , , {}, .F.,FWBuildFeature( STRUCT_FEATURE_INIPAD, ".F."))
+        oStruZA4:AddField('DESCRI',' ', 'DESCRI', 'C',100, 0, , , {},.F.,)
+        
+        oModel:GetModel('ZA2DETAIL'):SetOnlyQuery()
+        oModel:GetModel('ZA4DETAIL'):SetOnlyQuery()
 
-    oModel:SetActivate({|oModel| AfterActivate(oModel)})
+        //define que o grid nao é obrigatorio
+        oModel:GetModel('ZA2DETAIL'):SetOptional()
+        oModel:GetModel('ZA4DETAIL'):SetOptional()
+        oModel:SetActivate({|oModel| AfterActivate(oModel)}) 
+
 Return oModel
+
 //--------------------------------------- VIEW-------------------------------------------------
 Static Function ViewDef() //sempre static function
     local oView := FWFormView():New() //objeto da view
     local oStruct := FWFormStruct(2,'ZA7')
     local oStructZA8 := FWFormStruct(2,'ZA8') 
     local oStructZA2 := FWFormStruct(2,'ZA2')
+
+
     local oStructZA4 := FWFormStruct(2,'ZA4')
     oView:SetModel(ModelDef()) // linka a view com o model
     oStruct:RemoveField('ZA7_FILIAL')
@@ -124,6 +127,7 @@ Static Function validaP(oModelGrid)
     EndIf
 Return lOK
 //----------------------------------------------------------------------------------------
+
 Static Function criaButtonSel(oPanel,oOtherObject)//Autor
     TButton():New( 01, 10, "Selecionar Todos",oPanel,{|| SelGrid(oOtherObject)}, 60,10,,,.F.,.T.,.F.,,.F.,,,.F. )
     TButton():New( 01, 80, "Copiar Autores da Musica",oPanel,{||CopiaMusicas(oOtherObject)}, 80,10,,,.F.,.T.,.F.,,.F.,,,.F. )
@@ -133,6 +137,7 @@ Static Function criaBtn2(oPanel,oOtherObject)//Álbum
     TButton():New( 01, 10, "Selecionar Todos  ",oPanel,{|| SelGrid2(oOtherObject)}, 60,10,,,.F.,.T.,.F.,,.F.,,,.F. )
     TButton():New( 01, 80, "Copiar Músicas do Álbum",oPanel,{||CopiaAlbum(oOtherObject)}, 80,10,,,.F.,.T.,.F.,,.F.,,,.F. )
 Return
+
 //----------------------------------------------------------------------------------------
 Static Function SelGrid(oOtherObject)
     Local oGrid := oOtherObject:GetModel():GetModel("ZA2DETAIL")
@@ -146,6 +151,7 @@ Static Function SelGrid(oOtherObject)
         EndIf
     Next nX
     oGrid:GoLine(1)
+
     oOtherObject:oControl:Refresh('ZA2_VIEW')
 Return
 //----------------------------------------------------------------------------------------
@@ -274,7 +280,7 @@ Static Function CopiaAlbum(oOtherObject)
         If !oGrid:isDeleted(nX)
             lSelected := oGrid:GetValue("SELECT",nX)
             If lSelected
-                insAlbum(oGrid:GetValue("ZA4_MUSICA",nX), oGridAlbum)
+                insAlbum(oGrid:GetValue("ZA4_ALBUM",nX), oGridAlbum)
             EndIf
         EndIf
     Next nX
@@ -284,19 +290,19 @@ Static Function CopiaAlbum(oOtherObject)
 Return
 //----------------------------------------------------------------------------------------
 Static Function insAlbum(cCodAlbum,oGridAlbum)
-Local aAreaZA2 := ZA2->(GetArea())
+Local aAreaZA4 := ZA4->(GetArea())
 
     ZA2->(DBSetOrder(1)) //ZA2_FILIAL+ZA2_MUSICA
-    If ZA2->(DBSeek(xFilial("ZA2")+cCodAlbum))                 
-        While ZA2->(!EOF()) .AND. ZA2->ZA2_FILIAL == xFilial("ZA2") .AND.  ZA2->ZA2_MUSICA == cCodAlbum
+    If ZA4->(DBSeek(xFilial("ZA2")+cCodAlbum))                 
+        While ZA4->(!EOF()) .AND. ZA4->ZA4_FILIAL == xFilial("ZA4") .AND.  ZA4->ZA4_ALBUM == cCodAlbum
             If !oGridAlbum:IsEmpty()
                 oGridAlbum:AddLine()
             EndIf
-            oGridAlbum:SetValue("ZA8_MUSICA",ZA2->ZA2_MUSICA)
-            ZA2->(DBSkip())
+            oGridAlbum:SetValue("ZA8_MUSICA",ZA4->ZA4_MUSICA)
+            ZA4->(DBSkip())
         EndDo 
     EndIf
 
-RestArea(aAreaZA2)
+RestArea(aAreaZA4)
 Return
 

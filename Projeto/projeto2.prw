@@ -1,4 +1,6 @@
 #include 'protheus.ch'
+
+// -------------------------------MUSICA-------------------------------
 user function projeto2()
 local oBrowse := FWMBrowse():New() //Criar browse
 
@@ -11,7 +13,7 @@ Return
 
 Static Function Menudef()
 
-Return FWMVCMenu('projeto2') //Menu padrão com C.R.U.D. //nome da fonte
+Return FWMVCMenu('projeto2') //Menu padrï¿½o com C.R.U.D. //nome da fonte
 
 Static function ModelDef() //sempre staticfunction
 local oModel := MPFormModel():New('ZA1MODEL')
@@ -33,23 +35,23 @@ Return oModel
 
 Static Function PosVldMusic(oModelField) 
     local lTudoOk := .T.
-    local dData := oModelField:GetValue('ZA1_DATA')  //Validação da Data
+    local dData := oModelField:GetValue('ZA1_DATA')  //Validaï¿½ï¿½o da Data
     local cTipo := oModelField:GetValue("ZA1_GENERO ")
-    local cNome := oModelField:GetValue("ZA1_TITULO ") // Validação do Nome
+    local cNome := oModelField:GetValue("ZA1_TITULO ") // Validaï¿½ï¿½o do Nome
     local nMsc := oModelField:GetValue("ZA1_MUSICA") 
 
 
-    If dData > Date() //Condição para a validação da Data 
+    If dData > Date() //Condiï¿½ï¿½o para a validaï¿½ï¿½o da Data 
         lTudoOk := .F.   
-        Help(, , "Erro", , "Informe outra data", 1, 0, , , , , , {"Informe outra data menor ou igual á " + dtoc(date())})
+        Help(, , "Erro", , "Informe outra data", 1, 0, , , , , , {"Informe outra data menor ou igual Ã¡: " + dtoc(date())})
     EndIf    
     If Empty(cTipo)
         lTudoOk:= .F.
-        Help(, ,"Erro", , "o campo Tipo esta inválido", 1, 0, , , , , , {"Defina o genêro da música"})
+        Help(, ,"Erro", , "o campo Tipo esta invÃ¡lido", 1, 0, , , , , , {"Defina o genï¿½ro da musica"})
     EndIf
          If Empty(cNome)
         lTudoOk:= .F.
-        Help(, ,"Erro", , "o campo Nome esta inválido", 1, 0, , , , , , {"Defina o titulo da música"})
+        Help(, ,"Erro", , "o campo Nome esta invÃ¡lido", 1, 0, , , , , , {"Defina o titulo da musica"})
     EndIf
     Return lTudoOk
     

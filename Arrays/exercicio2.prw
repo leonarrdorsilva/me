@@ -4,11 +4,11 @@ e a idade do mesmo. Exiba os dados do segundo aluno.*/
 
 
 User Function Array2()
-// Variáveis
+// Variï¿½veis
 
 Local aAluno2 := {} // Array (3,2) definir o tamanho do array
 
-//Inicío
+//InicÃ­o
 
     aAdd(aAluno2, {"Leonardo",10})
     aAdd(aAluno2, {"Carlos",15})

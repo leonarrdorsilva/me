@@ -1,5 +1,6 @@
 #include 'protheus.ch'
-
+// -------------------------------AuTOR -------------------------------
+//ValidaÃ§Ã£o do FormulÃ¡rio
 user function projeto1()
 local oBrowse := FWMBrowse():New() //Criar browse
 
@@ -12,7 +13,7 @@ Return
 
 Static Function Menudef()
 
-Return FWMVCMenu('projeto1') //Menu padrão com C.R.U.D.
+Return FWMVCMenu('projeto1') //Menu padrï¿½o com C.R.U.D.
 
 Static function ModelDef() //sempre staticfunction
 local oModel := MPFormModel():New('ZA0MODEL')
@@ -20,17 +21,18 @@ local oStruZA0 := FWFormStruct(1,'ZA0') //cria estrutura
 local bPos := {|oModelField| PosVldAutor(oModelField) } 
 
 oModel:AddFields('ZA0MASTER',/*Owner*/ ,oStruZA0,/**/, bPos) // adiciona
+
 Return oModel
 
 Static Function PosVldAutor(oModelField)
     local lTudoOk := .T.
-    local dFalec := oModelField:GetValue('ZA0_DTAFAL') //Validação da Data
-    local cNome := oModelField:GetValue('ZA0_NOME') // Validação do Nome
+    local dFalec := oModelField:GetValue('ZA0_DTAFAL') //Valida o da Data
+    local cNome := oModelField:GetValue('ZA0_NOME') // Valida o do Nome
     local cTipo := oModelField:GetValue("ZA0_TIPO ")
         
-    If dFalec > Date() //Condição para a validação da Data 
+    If dFalec > Date() //Condiï¿½ï¿½o para a validaï¿½ï¿½o da Data 
         lTudoOk := .F.
-        Help(, , "Erro", , "Informe outra data", 1, 0, , , , , , {"Digite uma data válida de falecimento"})
+        Help(, , "Erro", , "Informe outra data", 1, 0, , , , , , {"Digite uma data vÃ¡lida de falecimento"})
     EndIf    
     If Empty(cNome)
         lTudoOk := .F.
@@ -38,7 +40,7 @@ Static Function PosVldAutor(oModelField)
     EndIf
     If Empty(cTipo)
         lTudoOk:= .F.
-        Help(, ,"Erro", , "o campo Tipo esta inválido", 1, 0, , , , , , {"Defina o tipo: Autor ou Interprete"})
+        Help(, ,"Erro", , "o campo Tipo esta invalido", 1, 0, , , , , , {"Defina o tipo: Autor ou Interprete"})
     EndIf
     
     

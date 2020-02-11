@@ -1,7 +1,7 @@
 #include 'protheus.ch'
 
-/*Criar um array para guardar o nome de 5 alunos, os nomes deverão ser colocados no
-array depois da declaração do mesmo, inserindo um valor de cada vez. Exiba o nome
+/*Criar um array para guardar o nome de 5 alunos, os nomes deverï¿½o ser colocados no
+array depois da declaraï¿½ï¿½o do mesmo, inserindo um valor de cada vez. Exiba o nome
 do terceiro aluno. */
     User Function AddNome ()
 
@@ -13,7 +13,7 @@ do terceiro aluno. */
     aAdd(aAluno, "Junior")
     aAdd(aAluno, "Francielly")
 
-    Alert ("Nome do Aluno:"+aAluno[3,1]+ " Idade:"+cValToChar(aAluno[3,2]))
+    Alert ("Nome do Aluno:"+aAluno[3,1]+ " Idade:" +cValToChar(aAluno[3,2]))
 
 
 Return

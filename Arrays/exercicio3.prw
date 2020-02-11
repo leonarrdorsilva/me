@@ -1,6 +1,6 @@
 #include 'protheus.ch'
-/*Criar um array sem tamanho definido e utilizar a função aAdd para adicionar 5
-alunos no array, sendo que cada aluno deve ter nome, media, idade e profissão. Exiba
+/*Criar um array sem tamanho definido e utilizar a funï¿½ï¿½o aAdd para adicionar 5
+alunos no array, sendo que cada aluno deve ter nome, media, idade e profissï¿½o. Exiba
 os dados do quinto aluno.*/
 
 User Function AddAluno()
@@ -13,13 +13,9 @@ User Function AddAluno()
         aAdd(aAluno, {"Igor RS",6,24,"Do Sul"})
 
         Alert("Nome do aluno: " +aAluno[5][1] +;
-              " Média: " + cValToChar(aAluno[5,2]) +;
+              " MÃ©dia: " + cValToChar(aAluno[5,2]) +;
               " Idade: " + cValToChar(aAluno[5,3]) +;
-              " Profissão: " + aAluno[5,4])
+              " ProfissÃ£o: " + aAluno[5,4])
 
               VarInfo ("Texto Qualquer",AddAluno)//para mostrar o tamanho do vetor no console
-
-
-
-
         Return

@@ -1,10 +1,24 @@
 #include 'protheus.ch'
 /*Crie um array para guardar o nome dos alunos dessa sala, usando o aAdd adicione o
-nome de 10 alunos. Depois disso, exclua 5 alunos do array usando a funÁ„o aDel e use
-a funÁ„o aSize pra redimensionar o tamanho de forma a n„o sobrar nenhuma posiÁ„o
-com o conte˙do NIL.*/
+nome de 10 alunos. Depois disso, exclua 5 alunos do array usando a fun√ß√£oo aDel e use
+a fun√ß√£o aSize pra redimensionar o tamanho de forma a n√£o sobrar nenhuma posi√ß√£o
+com o conte√∫do NIL.*/
 
 
+user Funciton aray5()
 
+Local Aaluno := {}
+ 
+ aAdd(aAluno, {"Amarelo"})
+ aAdd(aAluno, {"Roxo"})
+ aAdd(aAluno, {"Azul"})
+ aAdd(aAluno, {"Vermelho"})
+ aAdd(aAluno, {"Lil√°s"})
+ aAdd(aAluno, {"Marrom"})
+ aAdd(aAluno, {"Azul-Oceano"})
+ aAdd(aAluno, {"Bege"})
+ aAdd(aAluno, {"Rosa"})
+ aAdd(aAluno, {"Verde"})
+ aAdd(aAluno, {"Violeta"})
 
 Return
